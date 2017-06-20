@@ -39,7 +39,7 @@ public class Client {
 
 	/**
 	 * Gets client's address
-	 * @return aa string of the client's address
+	 * @return a string of the client's address
 	 */
 	public String getAddress() {
 		return address;
