@@ -1,7 +1,11 @@
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 
 /**
  * This class creates a Show for a client holding a show name, clientID, and
@@ -10,8 +14,9 @@ import java.util.List;
  * @author Matt Carlson, Jamison Czech, Slava Makharovich, Prashant Shrestha
  */
 
-public class CardList implements Serializable {
+public class CardList implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private static CardList cardList;
 	private List cards = new LinkedList();
 
@@ -82,6 +87,48 @@ public class CardList implements Serializable {
 			return cards.remove(creditCard);
 		}
 	}
+	
+	/**
+	 * write objects for serialization
+	 * @param output stream
+	 */
+	private void writeObject(ObjectOutputStream output) {
+	    try {
+	      //output.defaultWriteObject();
+	      output.writeObject(cardList);
+	    } 
+	    catch(IOException ioe) {
+	      System.out.println(ioe);
+	    }
+	  }
+	
+	  /**
+	   * read serialized object
+	   * @param input stream
+	   */
+	private void readObject(ObjectInputStream input) {
+		try {
+			if (cardList != null) {
+				return;
+			} 
+			else {
+				//input.defaultReadObject();
+				if (cardList == null) {
+					cardList = (CardList) input.readObject();
+				} 
+				else {
+					input.readObject();
+				}
+			}
+		} 
+		catch(IOException ioe) {
+			System.out.println("in CardList readObject \n" + ioe);
+		} 
+		catch(ClassNotFoundException cnfe) {
+				cnfe.printStackTrace();
+		}
+	}
+	
 	
 	/**
 	 * String of the card
