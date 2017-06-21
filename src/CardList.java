@@ -17,14 +17,12 @@ public class CardList implements Serializable {
 
 	/*
 	 * Private constructor to create singleton
-	 * 
 	 */
 	private CardList() {
 	}
 
 	/**
 	 * CardList singleton
-	 * 
 	 * @return the CardList singleton object
 	 */
 	public static CardList instance() {
@@ -36,11 +34,22 @@ public class CardList implements Serializable {
 		}
 	}
 	
+
+	/**
+	 * Adds a CreditCard to the collection
+	 * @param creditCard
+	 * @return a boolean indicating successful addition to collection
+	 */
 	public boolean inserCard(CreditCard creditCard) {
 		cards.add(creditCard);
 		return true;
 	}
 	
+	/**
+	 * searches for a credit card in the collection
+	 * @param cardNumber
+	 * @return a CreditCard if found or null if not found
+	 */
 	public CreditCard search(String cardNumber) {
 	    for (Iterator iterator = cards.iterator(); iterator.hasNext(); ) {
 	      CreditCard creditCard = (CreditCard) iterator.next();
@@ -51,7 +60,19 @@ public class CardList implements Serializable {
 	    return null;
 	  }
 	
+	/**
+	 * Getter for collection of cards
+	 * @return an iterator for the card collection
+	 */
+	public Iterator getCards() {
+		return cards.iterator();
+	}
 	
+	/**
+	 * removes a card with the given cardNumber from the collection
+	 * @param cardNumber
+	 * @return true if CreditCard exists in the collection, or false otherwise
+	 */
 	public boolean removeCard(String cardNumber) {
 		CreditCard creditCard = search(cardNumber);
 		if (creditCard == null) {

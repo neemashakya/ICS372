@@ -64,6 +64,4 @@ public class CreditCard {
 			return "Customer ID: " + customerID + " Card Number: " + cardNumber + " Expiration Date: "
 					+ expirationDate;
 		}
-
-	
 }
