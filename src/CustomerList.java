@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This class creates a Show for a client holding a show name, clientID, and
- * start and end date for the show. creation
+ * The collection class for Customer objects
+ * 
  * 
  * @author Matt Carlson, Jamison Czech, Slava Makharovich, Prashant Shrestha
  */
