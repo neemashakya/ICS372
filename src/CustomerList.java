@@ -53,7 +53,7 @@ public class CustomerList implements Serializable {
 	public Customer search(String customerID) {
 	    for (Iterator iterator = customers.iterator(); iterator.hasNext(); ) {
 	      Customer customer = (Customer) iterator.next();
-	      if (customer.getCustomerID(.equals(customerID)) {
+	      if (customer.getCustomerID().equals(customerID)) {
 	        return customer;
 	      }
 	    }
