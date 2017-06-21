@@ -48,7 +48,7 @@ public class CustomerList implements Serializable {
 	/**
 	 * searches for a customer in the collection
 	 * @param customer
-	 * @return a CreditCard if found or null if not found
+	 * @return a Customer if found or null if not found
 	 */
 	public Customer search(String customerID) {
 	    for (Iterator iterator = customers.iterator(); iterator.hasNext(); ) {
