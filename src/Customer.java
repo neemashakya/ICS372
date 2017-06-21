@@ -17,8 +17,8 @@ public class Customer {
 	private String name;
 	private String address;
 	private String phoneNumber;
-	private long customerID;
-	private double balance;
+	private String customerID;
+
 	private List customerCard = new LinkedList();
 
 	/**
@@ -32,7 +32,7 @@ public class Customer {
 		this.name = name;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
-		this.customerID = ID;
+		this.customerID = Long.toString(ID);
 		ID++;
 	}
 
@@ -96,7 +96,7 @@ public class Customer {
 	 * 
 	 * @return a long of the customer's ID number
 	 */
-	public long getCustomerID() {
+	public String getCustomerID() {
 		return customerID;
 	}
 
