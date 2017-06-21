@@ -11,7 +11,7 @@ public class Client {
 	private String name;
 	private String address;
 	private String phoneNumber;
-	private long clientID;
+	private String clientID;
 	private double balance;
 
 	/**
@@ -25,7 +25,7 @@ public class Client {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.balance = 0;
-		this.clientID = ID;
+		this.clientID = Long.toString(ID);
 		ID++;
 	}
 
@@ -57,7 +57,7 @@ public class Client {
 	 * Get the client's ID number
 	 * @return a long of the client's ID number
 	 */
-	public long getClientID() {
+	public String getClientID() {
 		return clientID;
 	}
 
