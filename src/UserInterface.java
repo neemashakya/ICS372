@@ -168,45 +168,105 @@ public class UserInterface {
     System.out.println(HELP + " for help");
   }
   /**
-   * Method to be called for adding a member.
+   * Method to be called for adding a client.
    * Prompts the user for the appropriate values and
-   * uses the appropriate Library method for adding the member.
+   * uses the appropriate Theater method for adding the client.
    *  
    */
-  public void addMember() {
+  public void addClient() {
     String name = getToken("Enter member name");
     String address = getToken("Enter address");
     String phone = getToken("Enter phone");
-    Member result;
-    result = library.addMember(name, address, phone);
+    Client result;
+    result = theater.addClient(name, address, phone);
     if (result == null) {
-      System.out.println("Could not add member");
+      System.out.println("Could not add client");
     }
     System.out.println(result);
   }
+  
   /**
-   * Method to be called for adding a book.
-   * Prompts the user for the appropriate values and
-   * uses the appropriate Library method for adding the book.
+   * Method to be called for removing a client.
+   * Prompts the user for the appropriate value and
+   * uses the appropriate Theater method for removing the client if possible.
    *  
    */
-  public void addBooks() {
-    Book result;
+  public void removeClient() {
+	  int result;
+	  do {
+		  String clientID = getToken("Enter client id");
+		  result = theater.removeClient(clientID);
+		  
+		  switch (result) {
+		  case Theater.CLIENT_NOT_FOUND:
+			  System.out.println("No such client");
+			  break;
+		  case Theater.CLIENT_HAS_SHOW:
+			  System.out.println("Client cannot be removed. Client has a scheduled show.");
+			  break;
+		  case Theater.CLIENT_REMOVED:
+			  System.out.println("Client was successfully removed");
+			  break;
+		  }
+		  if (!yesOrNo("Remove more clients?")) {
+		        break;
+	      }
+	  } while (true);
+  }
+  
+  /**
+   * Method to be called for displaying clients.
+   * Prompts the user for the appropriate values and
+   * uses the appropriate Theater method for displaying clients.
+   *  
+   */
+  public void getClients() {
+    Iterator result;
+    
+    result = theater.getClients();
+    if (result == null) {
+      System.out.println("No clients have been added");
+    } 
+    else {
+      while(result.hasNext()) {
+        Client client = (Client) result.next();
+        System.out.println(client.toString() + "\n");
+      }
+      System.out.println("\n  There are no more clients \n" );
+    }
+  }
+  
+  
+  /**
+   * Method to be called for adding a customer.
+   * Prompts the user for the appropriate values and
+   * uses the appropriate Theater method for adding the customer.
+   *  
+   */
+  public void addCustomer() {
+    Customer result;
     do {
-      String title = getToken("Enter  title");
-      String bookID = getToken("Enter id");
-      String author = getToken("Enter author");
-      result = library.addBook(title, author, bookID);
+      String name = getToken("Enter name");
+      String address = getToken("Enter address");
+      String phoneNumber = getToken("Enter phone number");
+      // needs to call card validation method
+      String cardNumber = getToken("Enter credit card number");
+      // needs to call expiration validation method
+      String expiration = getToken("Enter expiration date");
+  
+      result = theater.addCustomer(name, address, phoneNumber, cardNumber, expiration);
       if (result != null) {
         System.out.println(result);
       } else {
-        System.out.println("Book could not be added");
+        System.out.println("Customer could not be added");
       }
-      if (!yesOrNo("Add more books?")) {
+      if (!yesOrNo("Add more customers?")) {
         break;
       }
     } while (true);
   }
+  
+  
   /**
    * Method to be called for issuing books.
    * Prompts the user for the appropriate values and
@@ -464,9 +524,9 @@ public class UserInterface {
     help();
     while ((command = getCommand()) != EXIT) {
       switch (command) {
-        case ADD_CLIENT:        addMember();
+        case ADD_CLIENT:        addClient();
                                 break;
-        case REMOVE_CLIENT:         addBooks();
+        case REMOVE_CLIENT:     removeClient();
                                 break;
         case LIST_CLIENTS:       issueBooks();
                                 break;
