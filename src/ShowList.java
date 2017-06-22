@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,12 +15,12 @@ import java.util.List;
 public class ShowList implements Serializable {
 
 	private static ShowList showList;
-	private List show = new LinkedList();
+	private List shows = new LinkedList();
 
 	/*
 	 * Private constructor to create singleton
 	 */
-	private ClientList() {
+	private ShowList() {
 	}
 
 	/**
@@ -25,22 +28,22 @@ public class ShowList implements Serializable {
 	 * @return the ShowList singleton object
 	 */
 	public static ShowList instance() {
-		if (showtList == null) {
-			return (showtList = new ShowList());
+		if (showList == null) {
+			return (showList = new ShowList());
 		} 
 		else {
-			return ShowList;
+			return showList;
 		}
 	}
 	
 
 	/**
 	 * Adds a Show to the collection
-	 * @param show
+	 * @param newShow
 	 * @return a boolean indicating successful addition to collection
 	 */
-	public boolean insertClient(Show show) {
-		show.add(show);
+	public boolean insertShow(Show newShow) {
+		shows.add(newShow);
 		return true;
 	}
 	
@@ -50,7 +53,7 @@ public class ShowList implements Serializable {
 	 * @return a show if found or null if not found
 	 */
 	public Show search(String showName) {
-	    for (Iterator iterator = show.iterator(); iterator.hasNext(); ) {
+	    for (Iterator iterator = shows.iterator(); iterator.hasNext(); ) {
 	      Show show = (Show) iterator.next();
 	      if (show.getShowName().equals(showName)) {
 	        return show;
@@ -64,13 +67,54 @@ public class ShowList implements Serializable {
 	 * @param showName
 	 * @return true if Show exists in the collection, or false otherwise
 	 */
-	public boolean removeClient(String showName) {
-		Show show = search(showName);
-		if (show == null) {
-			return show;
+	public boolean removeShow(String showName) {
+		Show showSearch = search(showName);
+		if (showSearch == null) {
+			return false;
 		}
 		else {
-			return show.remove(showName);
+			return shows.remove(showName);
+		}
+	}
+	
+	/**
+	 * write objects for serialization
+	 * @param output stream
+	 */
+	private void writeObject(ObjectOutputStream output) {
+	    try {
+	      //output.defaultWriteObject();
+	      output.writeObject(showList);
+	    } 
+	    catch(IOException ioe) {
+	      System.out.println(ioe);
+	    }
+	  }
+	
+	  /**
+	   * read serialized object
+	   * @param input stream
+	   */
+	private void readObject(ObjectInputStream input) {
+		try {
+			if (showList != null) {
+				return;
+			} 
+			else {
+				//input.defaultReadObject();
+				if (showList == null) {
+					showList = (ShowList) input.readObject();
+				} 
+				else {
+					input.readObject();
+				}
+			}
+		} 
+		catch(IOException ioe) {
+			System.out.println("in ShowList readObject \n" + ioe);
+		} 
+		catch(ClassNotFoundException cnfe) {
+				cnfe.printStackTrace();
 		}
 	}
 	
@@ -79,7 +123,7 @@ public class ShowList implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return show.toString();
+		return shows.toString();
 	}
 
 }

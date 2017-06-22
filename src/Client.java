@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * This class creates a Client and assigns a unique ID to the Client upon creation
  * @author Matt Carlson, Jamison Czech, Slava Makharovich, Prashant Shrestha 
  */
 
-public class Client {
+public class Client implements Serializable{
 
 	// Unique identifier assigned to a new client
 	private static long ID = 1L;

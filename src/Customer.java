@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * 
  * @author Matt Carlson, Jamison Czech, Slava Makharovich, Prashant Shrestha
  */
-public class Customer {
+public class Customer implements Serializable{
 
 	// Unique identifier assigned to a new customer
 	private static long ID = 1L;

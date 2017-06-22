@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -29,7 +32,7 @@ public class ClientList implements Serializable {
 			return (clientList = new ClientList());
 		} 
 		else {
-			return ClientList;
+			return clientList;
 		}
 	}
 	
@@ -49,10 +52,10 @@ public class ClientList implements Serializable {
 	 * @param clientID
 	 * @return a Client if found or null if not found
 	 */
-	public Customer search(String clientID) {
-	    for (Iterator iterator = clients.iterator(); iterator.hasNext(); ) {
+	public Client search(String clientID) {
+	    for (Iterator iterator = clients.iterator(); iterator.hasNext();) {
 	      Client client = (Client) iterator.next();
-	      if (client.getClientID(.equals(clientID)) {
+	      if (client.getClientID().equals(clientID)) {
 	        return client;
 	      }
 	    }
@@ -72,6 +75,47 @@ public class ClientList implements Serializable {
 		}
 		else {
 			return clients.remove(clientID);
+		}
+	}
+	
+	/**
+	 * write objects for serialization
+	 * @param output stream
+	 */
+	private void writeObject(ObjectOutputStream output) {
+	    try {
+	      //output.defaultWriteObject();
+	      output.writeObject(clientList);
+	    } 
+	    catch(IOException ioe) {
+	      System.out.println(ioe);
+	    }
+	  }
+	
+	  /**
+	   * read serialized object
+	   * @param input stream
+	   */
+	private void readObject(ObjectInputStream input) {
+		try {
+			if (clientList != null) {
+				return;
+			} 
+			else {
+				//input.defaultReadObject();
+				if (clientList == null) {
+					clientList = (ClientList) input.readObject();
+				} 
+				else {
+					input.readObject();
+				}
+			}
+		} 
+		catch(IOException ioe) {
+			System.out.println("in ClientList readObject \n" + ioe);
+		} 
+		catch(ClassNotFoundException cnfe) {
+				cnfe.printStackTrace();
 		}
 	}
 	

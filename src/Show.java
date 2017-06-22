@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Calendar;
  * @author Matt Carlson, Jamison Czech, Slava Makharovich, Prashant Shrestha
  */
 
-public class Show {
+public class Show implements Serializable{
 
 	private String showName;
 	private String clientID;
