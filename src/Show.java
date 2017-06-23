@@ -69,7 +69,8 @@ public class Show implements Serializable{
 	/**
 	 * String representing a Show
 	 * 
-	 * @return a string representing a Show
+	 * @return
+	 *   a string representing a Show
 	 */
 	@Override
 	public String toString() {

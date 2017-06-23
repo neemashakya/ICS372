@@ -28,19 +28,15 @@ public class ClientList implements Serializable {
 	 * @return the ClientList singleton object
 	 */
 	public static ClientList instance() {
-		if (clientList == null) {
-			return (clientList = new ClientList());
-		} 
-		else {
-			return clientList;
-		}
+		return clientList == null ? (clientList = new ClientList()) : clientList;
 	}
 	
 
 	/**
 	 * Adds a Client to the collection
 	 * @param client
-	 * @return a boolean indicating successful addition to collection
+	 * @return
+	 * 	 A boolean value indicating successful addition to collection.
 	 */
 	public boolean insertClient(Client client) {
 		clients.add(client);
@@ -61,7 +57,17 @@ public class ClientList implements Serializable {
 	    }
 	    return null;
     }
-	
+
+    /**
+     * return a list of clients
+     */
+    public void getClientList(){
+        Iterator result = clients.iterator();
+        System.out.println("The Clients are: ");
+        while(result.hasNext()) {
+            System.out.println(result.next());
+        }
+    }
 	 
 	/**
 	 * removes a client with the given clientID from the collection
@@ -102,7 +108,7 @@ public class ClientList implements Serializable {
 				return;
 			} 
 			else {
-				//input.defaultReadObject();
+				    input.defaultReadObject();
 				if (clientList == null) {
 					clientList = (ClientList) input.readObject();
 				} 

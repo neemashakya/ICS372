@@ -69,8 +69,9 @@ public class Client implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Client ID: " + clientID + " Name: " + name + " Address: "
-				+ address + " Phone number: " + phoneNumber + " Balance: "
+		return "Client ID #: " + clientID + ", Name: " + name + ", Address: "
+				+ address + ", Phone number: " + phoneNumber + ", Balance: $" +
+				""
 				+ balance;
 	}
 
