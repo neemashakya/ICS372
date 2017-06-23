@@ -26,12 +26,7 @@ public class CustomerList implements Serializable {
 	 * @return the CustomerList singleton object
 	 */
 	public static CustomerList instance() {
-		if (customerList == null) {
-			return (customerList = new CustomerList());
-		} 
-		else {
-			return customerList;
-		}
+		return customerList == null ? (customerList = new CustomerList()) : customerList;
 	}
 	
 

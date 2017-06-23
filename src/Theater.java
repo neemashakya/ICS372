@@ -44,13 +44,7 @@ public class Theater implements Serializable{
 	 * @return the Theater singleton object
 	 */
 	public static Theater instance() {
-		if (theater == null) {
-			
-			return (theater = new Theater());
-		} 
-		else {
-			return theater;
-		}
+		return theater == null ? (theater = new Theater()) : theater;
 	}
 
 	public Client addClient(String name, String address, String phone) {
