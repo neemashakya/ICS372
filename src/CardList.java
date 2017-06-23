@@ -52,8 +52,10 @@ public class CardList implements Serializable{
 	
 	/**
 	 * searches for a credit card in the collection
-	 * @param cardNumber
-	 * @return a CreditCard if found or null if not found
+	 * @param
+	 * cardNumber
+	 * @return
+	 * a CreditCard if found or null if not found
 	 */
 	public CreditCard search(String cardNumber) {
 		//if(cards.size() > 0) {
