@@ -24,6 +24,7 @@ public class Theater implements Serializable{
 	private ClientList clientList;
 	private CustomerList customerList;
 	private ShowList showList;
+	private CardList cardList;
 	
 	private static Theater theater;
 	private List cards = new LinkedList();
@@ -32,6 +33,10 @@ public class Theater implements Serializable{
 	 * Private constructor to create singleton
 	 */
 	private Theater() {
+		cardList = CardList.instance();
+		clientList = ClientList.instance();
+		showList = ShowList.instance();
+		customerList = CustomerList.instance();
 	}
 
 	/**
@@ -40,6 +45,7 @@ public class Theater implements Serializable{
 	 */
 	public static Theater instance() {
 		if (theater == null) {
+			
 			return (theater = new Theater());
 		} 
 		else {
@@ -64,13 +70,40 @@ public class Theater implements Serializable{
 
 	public Customer addCustomer(String name, String address, String phoneNumber,
 			String cardNumber, String expiration) {
-		// TODO Auto-generated method stub
+		CreditCard card = cardList.search(cardNumber);
+		if (card == null) {
+			String customerID;
+			Customer customer = new Customer(name, address, phoneNumber);
+			customerID = customer.getCustomerID();
+			CreditCard newCard = new CreditCard(customerID, cardNumber, expiration);
+			if(cardList.insertCard(newCard)){
+				if(customer.insertCard(newCard)) {
+					customerList.insertCustomer(customer);
+					return customer;
+				}
+				else {
+					cardList.removeCard(cardNumber);
+					return null;
+				}
+			}
+			else {
+				return null;
+			}
+		}
 		return null;
 	}
 
 	public int removeCustomer(String customerID) {
-		// TODO Auto-generated method stub
-		return 0;
+		Customer customer = customerList.search(customerID);
+		if (!(customer==null)) {
+			for (Iterator iterator = customer.getCustomerCard(); iterator.hasNext();) {
+				CreditCard creditCard = (CreditCard)iterator.next();
+				cardList.removeCard(creditCard.getCardNumber());
+			}
+			customerList.removeCustomer(customerID);
+			return CUSTOMER_REMOVED;
+		}
+		return CUSTOMER_NOT_FOUND;
 	}
 
 	public int addCreditCard(String customerID, String cardNumber,

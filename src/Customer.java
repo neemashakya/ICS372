@@ -38,8 +38,8 @@ public class Customer implements Serializable{
 	}
 
 	// INCOMPLETE
-	public void insertCard(CreditCard creditCard) {
-		customerCard.add(creditCard);
+	public boolean insertCard(CreditCard creditCard) {
+		return customerCard.add(creditCard);
 	}
 
 	// INCOMPLETE
