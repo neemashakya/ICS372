@@ -16,11 +16,9 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 
 /**
- *
  * This class implements the user interface for the Theater project. The
  * commands are encoded as integers using a number of static final variables. A
  * number of utility methods exist to make it easier to parse the input.
- *
  */
 public class UserInterface {
     private static UserInterface userInterface;
@@ -70,10 +68,8 @@ public class UserInterface {
     /**
      * Gets a token after prompting
      *
-     * @param prompt
-     *            - whatever the user wants as prompt
+     * @param prompt - whatever the user wants as prompt
      * @return - the token from the keyboard
-     *
      */
     public String getToken(String prompt) {
         do {
@@ -93,27 +89,19 @@ public class UserInterface {
     /**
      * Queries for a yes or no and returns true for yes and false for no
      *
-     * @param prompt
-     *    The string to be prepended to the yes/no prompt
-     * @return
-     * 		true for yes and false for no
+     * @param prompt The string to be prepended to the yes/no prompt
+     * @return true for yes and false for no
      */
     private boolean yesOrNo(String prompt) {
         String more = getToken(prompt + " (Y|y)[es] or anything else for no");
-        if (more.charAt(0) != 'y' && more.charAt(0) != 'Y') {
-            return false;
-        }
-        return true;
+        return !(more.charAt(0) != 'y' && more.charAt(0) != 'Y');
     }
 
     /**
      * Converts the string to a number
      *
-     * @param prompt
-     *   the string for prompting
-     * @return
-     *   the integer corresponding to the string
-     *
+     * @param prompt the string for prompting
+     * @return the integer corresponding to the string
      */
     public int getNumber(String prompt) {
         do {
@@ -130,8 +118,7 @@ public class UserInterface {
     /**
      * Prompts for a date and gets a date object
      *
-     * @param prompt
-     *            the prompt
+     * @param prompt the prompt
      * @return the data as a Calendar object
      */
     public Calendar getDate(String prompt) {
@@ -152,8 +139,7 @@ public class UserInterface {
     /**
      * Prompts for a command from the keyboard
      *
-     * @return
-     * a valid command
+     * @return a valid command
      */
     public int getCommand() {
         do {
@@ -171,7 +157,6 @@ public class UserInterface {
 
     /**
      * Displays the help screen
-     *
      */
     public void help() {
         System.out.println("Enter a number between 0 and 13 as explained below:");
@@ -195,7 +180,6 @@ public class UserInterface {
      * Method to be called for adding a client. Prompts the user for the
      * appropriate values and uses the appropriate Theater method for adding the
      * client.
-     *
      */
     public void addClient() {
         String name = getToken("Enter member name");
@@ -213,7 +197,6 @@ public class UserInterface {
      * Method to be called for removing a client. Prompts the user for the
      * appropriate value and uses the appropriate Theater method for removing
      * the client if possible.
-     *
      */
     public void removeClient() {
         int result;
@@ -245,11 +228,10 @@ public class UserInterface {
     /**
      * Method to be called for displaying clients. Uses the appropriate Theater
      * method for displaying clients.
-     *
      */
     public void getClientList() {
         Iterator result;
-        result = theater.getClientList();
+        result = theater.getClients();
         if (result == null) {
             System.out.println("No clients have been added yet.");
         } else {
@@ -265,7 +247,6 @@ public class UserInterface {
      * Method to be called for adding a customer. Prompts the user for the
      * appropriate values and uses the appropriate Theater method for adding the
      * customer.
-     *
      */
     public void addCustomer() {
         Customer result;
@@ -295,7 +276,6 @@ public class UserInterface {
      * Method to be called for removing a customer. Prompts the user for the
      * appropriate value and uses the appropriate Theater method for removing
      * the customer if possible.
-     *
      */
     public void removeCustomer() {
         int result;
@@ -324,7 +304,6 @@ public class UserInterface {
      * Method to be called for add a credit cart. Prompts the user for the
      * appropriate values and uses the appropriate Theater method for adding the
      * credit card if possible.
-     *
      */
     public void addCreditCard() {
         int result;
@@ -361,7 +340,6 @@ public class UserInterface {
      * Method to be called for removing a credit card. Prompts the user for the
      * appropriate value and uses the appropriate Theater method for removing
      * the credit card if possible.
-     *
      */
     public void removeCard() {
         int result;
@@ -393,7 +371,6 @@ public class UserInterface {
     /**
      * Method to be called for getting customer list. Uses the appropriate
      * Theater method for getting customers.
-     *
      */
     public void getCustomers() {
         Iterator result = theater.getCustomers();
@@ -422,7 +399,6 @@ public class UserInterface {
      * Method to be called for add a show. Prompts the user for the appropriate
      * values and uses the appropriate Theater method for adding the show if
      * possible.
-     *
      */
     public void addShow() {
         int result;
@@ -457,7 +433,6 @@ public class UserInterface {
     /**
      * Method to be called for displaying shows. Uses the appropriate Theater
      * method for displaying shows.
-     *
      */
     public void getShows() {
         Iterator result;
@@ -477,10 +452,9 @@ public class UserInterface {
     /**
      * Method to be called for saving the Theater object. Uses the appropriate
      * Theater method for saving.
-     *
      */
     private void save() {
-        if (theater.save()) {
+        if (Theater.save()) {
             System.out.println(
                     " The theater has been successfully saved in the file TheaterData \n");
         } else {
@@ -491,28 +465,27 @@ public class UserInterface {
     /**
      * Method to be called for retrieving saved data. Uses the appropriate
      * Theater method for retrieval.
-     *
      */
     private void retrieve() {
         try {
             Theater tempTheater = Theater.retrieve();
             if (tempTheater != null) {
                 System.out.println(
-                        " The theater has been successfully retrieved from the file TheaterData \n");
+                        "The theater has been successfully retrieved from the file 'TheaterData' \n");
                 theater = tempTheater;
             } else {
                 System.out.println("File doesnt exist; creating new theater");
-                theater = theater.instance();
+                theater = Theater.instance();
             }
         } catch (Exception cnfe) {
             cnfe.printStackTrace();
         }
     }
 
+
     /**
      * Orchestrates the whole process. Calls the appropriate method for the
      * different functionalities.
-     *
      */
     public void process() {
         int command;
@@ -565,8 +538,7 @@ public class UserInterface {
     /**
      * The method to start the application. Simply calls process().
      *
-     * @param args
-     *            not used
+     * @param args not used
      */
     public static void main(String[] args) {
         UserInterface.instance().process();

@@ -18,8 +18,11 @@ public class Show implements Serializable{
 	/**
 	 * Creates a new Show
 	 * @param showName
+	 *
 	 * @param clientID
+	 *
 	 * @param startDate
+	 * 
 	 * @param endDate
 	 */
 	public Show(String showName, String clientID, Calendar startDate,

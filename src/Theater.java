@@ -28,7 +28,6 @@ public class Theater implements Serializable {
 
     private static Theater theater;
     private List cards = new LinkedList();
-    private List clients = new LinkedList();
 
     /*
      * Private constructor to create singleton
@@ -85,12 +84,8 @@ public class Theater implements Serializable {
     }
 
 
-    /**
-     *
-     */
-    public Iterator getClientList() {
-       clientList.getClientList();
-
+    public Iterator getClients() {
+        clientList.getClients();
         return null;
     }
 
@@ -190,8 +185,8 @@ public class Theater implements Serializable {
 
     /**
      * Retrieves a deserialized version of the theater from disk
-     *
-     * @return a Library object
+     * @return
+     *   a Library object
      */
     public static Theater retrieve() {
         try {
@@ -199,10 +194,10 @@ public class Theater implements Serializable {
             ObjectInputStream input = new ObjectInputStream(file);
             input.readObject();
             return theater;
-        } catch (IOException ioe) {
+        } catch(IOException ioe) {
             ioe.printStackTrace();
             return null;
-        } catch (ClassNotFoundException cnfe) {
+        } catch(ClassNotFoundException cnfe) {
             cnfe.printStackTrace();
             return null;
         }
@@ -211,7 +206,8 @@ public class Theater implements Serializable {
     /**
      * Writes the object to the output stream
      *
-     * @param output the stream to be written to
+     * @param output <code>ObjectOutputStream output</code>
+     *               the stream to be written to
      */
     private void writeObject(ObjectOutputStream output) {
         try {
