@@ -77,7 +77,7 @@ public class Show implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Show: " + showName + " Client ID: " + clientID + " Start Date: "
-				+ startDate + " End Date " + endDate;
+		return "Show: " + getShowName() + " Client ID: " + getClientID() + " Start Date: "
+				+ getStartDate() + " End Date " + getEndDate();
 	}
 }

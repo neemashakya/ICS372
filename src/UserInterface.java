@@ -160,7 +160,7 @@ public class UserInterface {
      */
     public void help() {
         System.out.println("Enter a number between 0 and 13 as explained below:");
-        System.out.println(EXIT + " to Exit\n");
+        System.out.println(EXIT + " to Exit");
         System.out.println(ADD_CLIENT + " to add a client ");
         System.out.println(REMOVE_CLIENT + " to remove client ");
         System.out.println(LIST_CLIENTS + " to list all clients ");
