@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 public class Theater implements Serializable {
@@ -28,7 +25,7 @@ public class Theater implements Serializable {
 
     private static Theater theater;
     private List cards = new LinkedList();
-
+     private List client = new LinkedList();
     /*
      * Private constructor to create singleton
      *
@@ -80,13 +77,14 @@ public class Theater implements Serializable {
         if (clientList.removeClient(clientID)) {
             return (CLIENT_REMOVED);
         }
-        return (CLIENT_REMOVED);
+        return (CLIENT_NOT_FOUND);
     }
 
 
     public Iterator getClients() {
-        clientList.getClients();
-        return null;
+
+       return clientList.getClients();
+
     }
 
     /**
@@ -175,6 +173,7 @@ public class Theater implements Serializable {
             FileOutputStream file = new FileOutputStream("TheaterData");
             ObjectOutputStream output = new ObjectOutputStream(file);
             output.writeObject(theater);
+            output.writeObject(CreateIdServer.instance());
             return true;
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -193,6 +192,7 @@ public class Theater implements Serializable {
             FileInputStream file = new FileInputStream("TheaterData");
             ObjectInputStream input = new ObjectInputStream(file);
             input.readObject();
+            CreateIdServer.retrieve(input);
             return theater;
         } catch(IOException ioe) {
             ioe.printStackTrace();

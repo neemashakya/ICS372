@@ -182,13 +182,13 @@ public class UserInterface {
      * client.
      */
     public void addClient() {
-        String name = getToken("Enter member name");
-        String address = getToken("Enter address");
-        String phone = getToken("Enter phone");
+        String name = getToken("Enter Client's name: ");
+        String address = getToken("Enter address: ");
+        String phone = getToken("Enter phone number: ");
         Client result;
         result = theater.addClient(name, address, phone);
         if (result == null) {
-            System.out.println("Could not add client");
+            System.out.println("Error, could not add client to database.");
         }
         System.out.println(result);
     }
@@ -228,6 +228,8 @@ public class UserInterface {
     /**
      * Method to be called for displaying clients. Uses the appropriate Theater
      * method for displaying clients.
+     * <b>PostCondition:</b>
+     * Returns a collection of all available clients.
      */
     public void getClientList() {
         Iterator result;
@@ -239,7 +241,7 @@ public class UserInterface {
                 Client client = (Client) result.next();
                 System.out.println(client.toString() + "\n");
             }
-            System.out.println("\n  There are no more clients \n");
+            System.out.println("\nThere are no more clients.\n");
         }
     }
 

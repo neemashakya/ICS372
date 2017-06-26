@@ -6,7 +6,7 @@ import java.io.Serializable;
  */
 
 public class Client implements Serializable{
-
+  
     // Unique identifier assigned to a new client
     private static long ID = 1L;
     private String name;
@@ -14,7 +14,7 @@ public class Client implements Serializable{
     private String phoneNumber;
     private String clientID;
     private double balance;
-
+    private static final String CLIENT_ID_STRING = "CL-";
     /**
      * Creates a new Client assigning a unique ID and default balance
      * @param name
@@ -26,16 +26,30 @@ public class Client implements Serializable{
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.balance = 0;
-        this.clientID = Long.toString(ID);
+        //this.clientID = Long.toString(ID);
+        clientID =  CLIENT_ID_STRING + (  CreateIdServer.instance().getId());
         ID++;
     }
 
     /**
      * Gets client's name
-     * @return a string of the client's name
+     * @return
+     * <b>PostCondition:</b>
+     *   Returns a string of the client's name.
      */
     public String getName() {
         return name;
+    }
+
+
+    /**
+     *
+     * @return
+     * <b>PostCondition:</b>
+     *   Returns the Client's current balance
+     */
+    public double getBalance() {
+        return balance;
     }
 
     /**
@@ -68,8 +82,8 @@ public class Client implements Serializable{
      */
     @Override
     public String toString() {
-        return "Client ID: " + clientID + " Name: " + name + " Address: "
-                + address + " Phone number: " + phoneNumber + " Balance: "
+        return "Client ID: " + getClientID() + " Name: " + getName() + " Address: "
+                + getAddress() + " Phone number: " + getPhoneNumber()+ " Balance: "
                 + balance;
 
 

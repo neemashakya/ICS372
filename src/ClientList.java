@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.List;
  */
 
 public class ClientList implements Serializable {
-
 
 
     private static ClientList clientList;
@@ -34,13 +34,22 @@ public class ClientList implements Serializable {
         return clientList == null ? (clientList = new ClientList()) : clientList;
     }
 
-
-    public void getClients(){
+   
+    /**
+     * Returns an iteration for all
+     * of the clients.
+     */
+    public Iterator getClients() {
         Iterator result = clients.iterator();
-        System.out.println("The Clients are: ");
-        while(result.hasNext()) {
-            System.out.println(result.next());
+        if (clients != null && !clients.isEmpty()) {
+            System.out.println("The Clients are: ");
+            while (result.hasNext()) {
+                System.out.println(result.next());
+            }
         }
+
+
+        return result;
     }
 
     /**
@@ -57,13 +66,12 @@ public class ClientList implements Serializable {
 
     /**
      * searches for a client in the collection
-     * @param
-     *   clientID <CODE>String ClientID</CODE>
-     * @return
-     *   client
+     * @param clientID
+     *   <CODE>String ClientID</CODE>
+     * @return client
      */
     public Client search(String clientID) {
-        for (Iterator iterator = clients.iterator(); iterator.hasNext();) {
+        for (Iterator iterator = clients.iterator(); iterator.hasNext(); ) {
             Client client = (Client) iterator.next();
             if (client.getClientID().equals(clientID)) {
                 return client;
@@ -77,58 +85,56 @@ public class ClientList implements Serializable {
      * Removes a client with the given clientID from the collection.
      * @param clientID
      *   string clientID
-     * @return
-     *   true if Client exists in the collection, or false otherwise
+     * @return true
+     *   If Client exists in the collection,
+     *   or false otherwise.
      */
     public boolean removeClient(String clientID) {
         Client client = search(clientID);
+        System.out.println(clients.toArray());
         if (client == null) {
             return false;
-        }
-        else {
+        } else {
             return clients.remove(clientID);
         }
     }
 
     /**
      * write objects for serialization
-     * @param output
-     *   stream
+     *
+     * @param output stream
      */
     private void writeObject(ObjectOutputStream output) {
         try {
             output.defaultWriteObject();
             output.writeObject(clientList);
-        }
-        catch(IOException ioe) {
+
+        } catch (IOException ioe) {
             System.out.println(ioe);
         }
     }
 
     /**
-     * read serialized object
-     * @param input
-     *   stream
+     * read serialized object from
+     * persistent data
+     *
+     * @param input ObjectInputStream stream
      */
     private void readObject(ObjectInputStream input) {
         try {
             if (clientList != null) {
                 return;
-            }
-            else {
+            } else {
                 input.defaultReadObject();
                 if (clientList == null) {
                     clientList = (ClientList) input.readObject();
-                }
-                else {
+                } else {
                     input.readObject();
                 }
             }
-        }
-        catch(IOException ioe) {
+        } catch (IOException ioe) {
             System.out.println("in ClientList readObject \n" + ioe);
-        }
-        catch(ClassNotFoundException cnfe) {
+        } catch (ClassNotFoundException cnfe) {
             cnfe.printStackTrace();
         }
     }
