@@ -55,7 +55,25 @@ public class CustomerList implements Serializable {
 	    return null;
 	  }
 
-	
+
+	/**
+	 * Returns an iteration for all
+	 * of the customers and their cards.
+	 */
+	public Iterator getCustomers() {
+		Iterator result = customers.iterator();
+		if (customers != null && !customers.isEmpty()) {
+			System.out.println("The Customers are: ");
+			while (result.hasNext()) {
+				System.out.println(result.next());
+			}
+		}
+
+
+		return result;
+	}
+
+
 	/**
 	 * removes a customer with the given customerID from the collection
 	 * @param customerID

@@ -1,5 +1,8 @@
 import java.io.*;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Theater implements Serializable {
@@ -18,6 +21,7 @@ public class Theater implements Serializable {
     public static final int ONLY_CARD = 10;
     public static final int DATE_NOT_OPEN = 11;
     public static final int SHOW_ADDED = 12;
+    public static final int SHOW_NOT_ADDED = 13;
     private ClientList clientList;
     private CustomerList customerList;
     private ShowList showList;
@@ -25,7 +29,8 @@ public class Theater implements Serializable {
 
     private static Theater theater;
     private List cards = new LinkedList();
-     private List client = new LinkedList();
+    private List client = new LinkedList();
+
     /*
      * Private constructor to create singleton
      *
@@ -49,10 +54,13 @@ public class Theater implements Serializable {
     }
 
     /**
-     * @param name    <CODE>String Name</CODE>
-     * @param address <CODE>String address</CODE>
-     * @param phone   <CODE>String phone</CODE>
-     * @return
+     * @param name
+     *   <CODE>String Name</CODE>
+     * @param address
+     *   <CODE>String address</CODE>
+     * @param phone
+     *   <CODE>String phone</CODE>
+     * @return adds a client to the clientList if successful.
      */
     public Client addClient(String name, String address, String phone) {
         Client client = new Client(name, address, phone);
@@ -73,7 +81,7 @@ public class Theater implements Serializable {
         Client client = clientList.search(clientID);
         if (client == null) {
             return (CLIENT_NOT_FOUND);
-        }else {
+        } else {
             clientList.removeClient(clientID);
             return (CLIENT_REMOVED);
         }
@@ -82,7 +90,7 @@ public class Theater implements Serializable {
 
     public Iterator getClients() {
 
-       return clientList.getClients();
+        return clientList.getClients();
 
     }
 
@@ -138,23 +146,32 @@ public class Theater implements Serializable {
     public int addCreditCard(String customerID, String cardNumber,
                              String expiration) {
         // TODO Auto-generated method stub
-        return 0;
+        CreditCard creditCard = new CreditCard(customerID, cardNumber, expiration);
+        if (cardList.insertCard(creditCard)) {
+            return CARD_ADDED;
+        }
+        return CARD_NOT_FOUND;
     }
 
     public int removeCard(String cardNumber) {
         // TODO Auto-generated method stub
+        CreditCard card = cardList.search(cardNumber);
+
+
         return 0;
     }
 
     public Iterator getCustomers() {
-        // TODO Auto-generated method stub
-        return null;
+        return customerList.getCustomers();
     }
 
     public int addShow(String clientID, String showName, Calendar startDate,
                        Calendar endDate) {
-        // TODO Auto-generated method stub
-        return 0;
+        Show show = new Show(clientID, showName, startDate, endDate);
+        if (showList.insertShow(show)) {
+            return SHOW_ADDED;
+        }
+        return SHOW_NOT_ADDED;
     }
 
     public Iterator getShows() {
@@ -183,8 +200,8 @@ public class Theater implements Serializable {
 
     /**
      * Retrieves a deserialized version of the theater from disk
-     * @return
-     *   a Library object
+     *
+     * @return a Library object
      */
     public static Theater retrieve() {
         try {
@@ -193,10 +210,10 @@ public class Theater implements Serializable {
             input.readObject();
             CreateIdServer.retrieve(input);
             return theater;
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
             return null;
-        } catch(ClassNotFoundException cnfe) {
+        } catch (ClassNotFoundException cnfe) {
             cnfe.printStackTrace();
             return null;
         }
@@ -205,8 +222,9 @@ public class Theater implements Serializable {
     /**
      * Writes the object to the output stream
      *
-     * @param output <code>ObjectOutputStream output</code>
-     *               the stream to be written to
+     * @param output
+     *   <code>ObjectOutputStream output</code>
+     *     the stream to be written to
      */
     private void writeObject(ObjectOutputStream output) {
         try {

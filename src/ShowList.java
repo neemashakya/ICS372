@@ -40,7 +40,9 @@ public class ShowList implements Serializable {
 	/**
 	 * Adds a Show to the collection
 	 * @param newShow
-	 * @return a boolean indicating successful addition to collection
+	 *   Show newSHow
+	 * @return
+	 *   a boolean indicating successful addition to collection
 	 */
 	public boolean insertShow(Show newShow) {
 		shows.add(newShow);
@@ -50,6 +52,7 @@ public class ShowList implements Serializable {
 	/**
 	 * searches for a show in the collection
 	 * @param showName
+	 *   String showName
 	 * @return a show if found or null if not found
 	 */
 	public Show search(String showName) {
@@ -65,6 +68,7 @@ public class ShowList implements Serializable {
 	/**
 	 * removes a show with the given showName from the collection
 	 * @param showName
+	 * String showName
 	 * @return true if Show exists in the collection, or false otherwise
 	 */
 	public boolean removeShow(String showName) {
@@ -83,7 +87,7 @@ public class ShowList implements Serializable {
 	 */
 	private void writeObject(ObjectOutputStream output) {
 	    try {
-	      //output.defaultWriteObject();
+	      output.defaultWriteObject();
 	      output.writeObject(showList);
 	    } 
 	    catch(IOException ioe) {

@@ -256,7 +256,7 @@ public class UserInterface {
         do {
             String name = getToken("Enter name");
             String address = getToken("Enter address");
-            String phoneNumber = getToken("Enter phone number");
+            String phoneNumber = getToken("Enter phone number #");
             // needs to call card validation method
             String cardNumber = getToken("Enter credit card number");
             // needs to call expiration validation method
@@ -284,7 +284,7 @@ public class UserInterface {
     public void removeCustomer() {
         int result;
         do {
-            String customerID = getToken("Enter customer id");
+            String customerID = getToken("Enter customer id:");
             result = theater.removeCustomer(customerID);
 
             switch (result) {
@@ -328,7 +328,7 @@ public class UserInterface {
                     System.out.println("Card already in the system");
                     break;
                 case Theater.CARD_ADDED:
-                    System.out.println("Card successfully added");
+                    System.out.println("Card successfully added!");
                     break;
                 default:
                     System.out.println("There was an error");
@@ -348,7 +348,7 @@ public class UserInterface {
     public void removeCard() {
         int result;
         do {
-            String cardNumber = getToken("Enter cardNumber");
+            String cardNumber = getToken("Enter cardNumber: ");
             result = theater.removeCard(cardNumber);
 
             switch (result) {
@@ -360,10 +360,10 @@ public class UserInterface {
                             "Card cannot be removed. Customer must have at least one card on file.");
                     break;
                 case Theater.CARD_REMOVED:
-                    System.out.println("Card was successfully removed");
+                    System.out.println("Card was successfully removed!");
                     break;
                 default:
-                    System.out.println("There was an error");
+                    System.out.println("There was an error:");
                     break;
             }
             if (!yesOrNo("Remove more cards?")) {
@@ -407,25 +407,25 @@ public class UserInterface {
     public void addShow() {
         int result;
         do {
-            String clientID = getToken("Enter client id");
-            String showName = getToken("Enter name of show");
-            Calendar startDate = getDate("Enter start date");
-            Calendar endDate = getDate("Enter end date");
+            String clientID = getToken("Enter client id:");
+            String showName = getToken("Enter name of show:");
+            Calendar startDate = getDate("Enter start date as mm/dd/yy:");
+            Calendar endDate = getDate("Enter end date as mm/dd/yy:");
 
             result = theater.addShow(clientID, showName, startDate, endDate);
 
             switch (result) {
                 case Theater.CLIENT_NOT_FOUND:
-                    System.out.println("No such client");
+                    System.out.println("No such client!");
                     break;
                 case Theater.DATE_NOT_OPEN:
-                    System.out.println("Date range is unavailable");
+                    System.out.println("Date range is unavailable:");
                     break;
                 case Theater.SHOW_ADDED:
-                    System.out.println("Show successfully added");
+                    System.out.println("Show successfully added:");
                     break;
                 default:
-                    System.out.println("There was an error");
+                    System.out.println("There was an error:");
                     break;
             }
             if (!yesOrNo("Add another show?")) {
@@ -443,13 +443,13 @@ public class UserInterface {
 
         result = theater.getShows();
         if (result == null) {
-            System.out.println("No shows have been added");
+            System.out.println("No shows have been added.");
         } else {
             while (result.hasNext()) {
                 Show show = (Show) result.next();
                 System.out.println(show.toString() + "\n");
             }
-            System.out.println("\n  There are no more shows \n");
+            System.out.println("\n There are no more shows in the list.\n");
         }
     }
 
@@ -462,7 +462,7 @@ public class UserInterface {
             System.out.println(
                     " The theater has been successfully saved in the file TheaterData \n");
         } else {
-            System.out.println(" There has been an error in saving \n");
+            System.out.println("There has been an error in saving!\n");
         }
     }
 

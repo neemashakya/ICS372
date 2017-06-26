@@ -112,8 +112,8 @@ public class Customer implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Customer ID: " + customerID + " Name: " + name + " Address: "
-				+ address + " Phone number: " + phoneNumber;
+		return "Customer ID: " + customerID + ", Name: " + name + ", Address: "
+				+ address + ", Phone number: #" + phoneNumber;
 	}
 
 }
