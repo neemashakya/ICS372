@@ -2,11 +2,12 @@ import java.io.Serializable;
 
 /**
  * This class creates a Client and assigns a unique ID to the Client upon creation
- * @author Matt Carlson, Jamison Czech, Slava Makharovich, Prashant Shrestha 
+ *
+ * @author Matt Carlson, Jamison Czech, Slava Makharovich, Prashant Shrestha
  */
 
-public class Client implements Serializable{
-  
+public class Client implements Serializable {
+
     // Unique identifier assigned to a new client
     private static long ID = 1L;
     private String name;
@@ -14,38 +15,39 @@ public class Client implements Serializable{
     private String phoneNumber;
     private String clientID;
     private double balance;
-    private static final String CLIENT_ID_STRING = "CL-";
+    private static final String CLIENT_ID_STRING = "cl";
+
     /**
      * Creates a new Client assigning a unique ID and default balance
+     *
      * @param name
+     *   String name
      * @param address
+     *   String address
      * @param phoneNumber
+     *   String phoneNumber
      */
     public Client(String name, String address, String phoneNumber) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.balance = 0;
-        //this.clientID = Long.toString(ID);
-        clientID =  CLIENT_ID_STRING + (  CreateIdServer.instance().getId());
-        ID++;
+        clientID = CLIENT_ID_STRING + (CreateIdServer.instance().getId());
+
     }
 
     /**
      * Gets client's name
-     * @return
-     * <b>PostCondition:</b>
+     * @return <b>PostCondition:</b>
      *   Returns a string of the client's name.
      */
     public String getName() {
         return name;
     }
 
-
     /**
-     *
-     * @return
-     * <b>PostCondition:</b>
+     * Get's client's current balance
+     * @return <b>PostCondition:</b>
      *   Returns the Client's current balance
      */
     public double getBalance() {
@@ -54,7 +56,10 @@ public class Client implements Serializable{
 
     /**
      * Gets client's address
-     * @return a string of the client's address
+     *
+     * @return
+     * <b>PostCondition:</b>
+     *   a string of the client's address
      */
     public String getAddress() {
         return address;
@@ -62,7 +67,10 @@ public class Client implements Serializable{
 
     /**
      * Gets client's phone number
-     * @return a string of the client's phone number
+     *
+     * @return
+     * <b>PostCondition:</b>
+     *   a string of the client's phone number
      */
     public String getPhoneNumber() {
         return phoneNumber;
@@ -70,7 +78,9 @@ public class Client implements Serializable{
 
     /**
      * Get the client's ID number
-     * @return a long of the client's ID number
+     *
+     * @return <b>PostCondition:</b>
+     *   a long of the client's ID number
      */
     public String getClientID() {
         return clientID;
@@ -78,17 +88,13 @@ public class Client implements Serializable{
 
     /**
      * String representing a client
-     * @return a string representing a client
+     * @return <b>PostCondition:</b>
+     *   a string representing a client
      */
     @Override
     public String toString() {
         return "Client ID: " + getClientID() + " Name: " + getName() + " Address: "
-                + getAddress() + " Phone number: " + getPhoneNumber()+ " Balance: "
-                + balance;
-
-
-
-
+                + getAddress() + " Phone number: " + getPhoneNumber() + " Balance: "
+                + getBalance();
     }
-
-}
+}// end Client
