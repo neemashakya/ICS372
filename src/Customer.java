@@ -19,22 +19,26 @@ public class Customer implements Serializable{
 	private String address;
 	private String phoneNumber;
 	private String customerID;
-
+    private static final String CUSTOMER_ID_STRING = "cust ";
 	private List customerCard = new LinkedList();
 
 	/**
 	 * Creates a new Customer assigning a unique ID and default balance
 	 * 
 	 * @param name
+	 *   String name
 	 * @param address
+	 *   String address
 	 * @param phoneNumber
+	 *   String phoneNumber
 	 */
 	public Customer(String name, String address, String phoneNumber) {
 		this.name = name;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
-		this.customerID = Long.toString(ID);
-		ID++;
+	//	this.customerID = Long.toString(ID);
+	//	ID++;
+        customerID = CUSTOMER_ID_STRING + (CreateIdServer.instance().getId());
 	}
 
 	// INCOMPLETE

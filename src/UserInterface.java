@@ -249,6 +249,7 @@ public class UserInterface {
      * Method to be called for adding a customer. Prompts the user for the
      * appropriate values and uses the appropriate Theater method for adding the
      * customer.
+     *
      */
     public void addCustomer() {
         Customer result;
@@ -273,6 +274,7 @@ public class UserInterface {
             }
         } while (true);
     }
+
 
     /**
      * Method to be called for removing a customer. Prompts the user for the

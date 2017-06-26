@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 public class CreditCard implements Serializable{
 
-	private static final long serialVersionUID = 1L;
 	private String customerID;
 	private String cardNumber;
 	private String expirationDate;
@@ -18,13 +17,17 @@ public class CreditCard implements Serializable{
 	 * Creates a new CreditCard
 	 * 
 	 * @param customerID
+	 *  String customerID
 	 * @param cardNumber
+	 *   cardNumber
 	 * @param expirationDate
+	 *   expirationDate
 	 */
 	public CreditCard(String customerID, String cardNumber, String expirationDate) {
 		this.customerID = customerID;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
+
 	}
 
 
@@ -64,7 +67,7 @@ public class CreditCard implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Customer ID: " + customerID + " Card Number: " + cardNumber + " Expiration Date: "
+		return "Customer ID: " + customerID + ", Card Number: " + cardNumber + ", Expiration Date: "
 					+ expirationDate;
 	}
 }

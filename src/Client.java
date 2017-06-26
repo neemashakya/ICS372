@@ -15,7 +15,7 @@ public class Client implements Serializable {
     private String phoneNumber;
     private String clientID;
     private double balance;
-    private static final String CLIENT_ID_STRING = "cl";
+    private static final String CLIENT_ID_STRING = "cl ";
 
     /**
      * Creates a new Client assigning a unique ID and default balance
@@ -93,8 +93,8 @@ public class Client implements Serializable {
      */
     @Override
     public String toString() {
-        return "Client ID: " + getClientID() + " Name: " + getName() + " Address: "
-                + getAddress() + " Phone number: " + getPhoneNumber() + " Balance: "
+        return "Client ID: " + getClientID() + ", Name: " + getName() + ", Address: "
+                + getAddress() + ", Phone number: #" + getPhoneNumber() + ", Balance: $"
                 + getBalance();
     }
 }// end Client

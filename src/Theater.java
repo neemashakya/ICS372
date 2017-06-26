@@ -73,11 +73,10 @@ public class Theater implements Serializable {
         Client client = clientList.search(clientID);
         if (client == null) {
             return (CLIENT_NOT_FOUND);
-        }
-        if (clientList.removeClient(clientID)) {
+        }else {
+            clientList.removeClient(clientID);
             return (CLIENT_REMOVED);
         }
-        return (CLIENT_NOT_FOUND);
     }
 
 

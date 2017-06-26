@@ -54,14 +54,8 @@ public class CustomerList implements Serializable {
 	    }
 	    return null;
 	  }
+
 	
-	
-	
-	
-	
-	
-	
-	 
 	/**
 	 * removes a customer with the given customerID from the collection
 	 * @param customerID

@@ -91,7 +91,7 @@ public class ClientList implements Serializable {
      */
     public boolean removeClient(String clientID) {
         Client client = search(clientID);
-        System.out.println(clients.toArray());
+        
         if (client == null) {
             return false;
         } else {
