@@ -64,7 +64,24 @@ public class ShowList implements Serializable {
 	    }
 	    return null;
 	  }
-	 
+
+    /**
+     * Returns an iteration for all
+     * of the customers and their cards.
+     */
+    public Iterator getShows() {
+        Iterator result = shows.iterator();
+        if (shows != null && !shows.isEmpty()) {
+            System.out.println("The Shows are: ");
+            while (result.hasNext()) {
+                System.out.println(result.next());
+            }
+        }
+
+
+        return result;
+    }
+
 	/**
 	 * removes a show with the given showName from the collection
 	 * @param showName

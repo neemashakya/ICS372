@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -88,7 +91,47 @@ public class CustomerList implements Serializable {
 			return customers.remove(customerID);
 		}
 	}
-	
+
+    /**
+     * write objects for serialization
+     *
+     * @param output stream
+     */
+    private void writeObject(ObjectOutputStream output) {
+        try {
+            output.defaultWriteObject();
+            output.writeObject(customerList);
+
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+        }
+    }
+
+    /**
+     * read serialized object from
+     * persistent data
+     *
+     * @param input ObjectInputStream stream
+     */
+    private void readObject(ObjectInputStream input) {
+        try {
+            if (customerList != null) {
+                return;
+            } else {
+                input.defaultReadObject();
+                if (customerList == null) {
+                    customerList = (CustomerList) input.readObject();
+                } else {
+                    input.readObject();
+                }
+            }
+        } catch (IOException ioe) {
+            System.out.println("in ClientList readObject \n" + ioe);
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
+    }
+
 	/**
 	 * String of the customer
 	 */

@@ -145,7 +145,7 @@ public class Theater implements Serializable {
 
     public int addCreditCard(String customerID, String cardNumber,
                              String expiration) {
-        // TODO Auto-generated method stub
+       
         CreditCard creditCard = new CreditCard(customerID, cardNumber, expiration);
         if (cardList.insertCard(creditCard)) {
             return CARD_ADDED;
@@ -175,8 +175,8 @@ public class Theater implements Serializable {
     }
 
     public Iterator getShows() {
-        // TODO Auto-generated method stub
-        return null;
+       return showList.getShows();
+
     }
 
     /**
